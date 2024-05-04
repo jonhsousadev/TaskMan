@@ -1,3 +1,4 @@
+import { AuthModule } from './../auth/auth.module';
 
 import { Module } from '@nestjs/common';
 import { TasksService } from './tasks.service';
@@ -7,7 +8,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([
+  imports: [
+    AuthModule,
+    MongooseModule.forFeature([
     {
       name: 'Task',
       schema: TaskSchema
