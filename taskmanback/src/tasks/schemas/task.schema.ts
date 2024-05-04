@@ -1,6 +1,13 @@
-import * as mongoose from 'mongoose'
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 
-export const TaskSchema = new mongoose.Schema({
-  title: String,
-  completed: Boolean
+@Schema({
+  timestamps: false
 })
+export class Task {
+  @Prop()
+  title: string;
+  @Prop()
+  completed: boolean;
+}
+
+export const TaskSchema = SchemaFactory.createForClass(Task)
