@@ -8,7 +8,7 @@
 <div class="flex-auto md:w-4/5 sm:w-full flex-auto justify-center border-separate border-spacing-y-3">
   <div class="w-full">
     <div class="p-6 mt-4 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] sm:flex-col" *ngFor="let task of tasks.slice().reverse()">
-      <div class="p-6 xl:text-xl md:text-base">{{task.title}}</div>
+      <div class="p-6 xl:text-xl md:text-base" [class.completed-task]="task.completed">{{task.title}}</div>
       <div class="p-6 flex justify-end items-center">
           <label class="inline-flex items-center cursor-pointer">
             <input type="checkbox" value="" class="sr-only peer" [(ngModel)]="task.completed" [checked]="task.completed" (click)="toggleCompleted(task)">
