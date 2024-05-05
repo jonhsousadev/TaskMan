@@ -26,7 +26,6 @@ export class TasksComponent implements OnInit{
   findAll(): void {
     this.taskService.findAll().subscribe({ 
       next: (response) => {
-        console.log(response)
         this.tasks = response
       },
       error: (err) => {
@@ -55,7 +54,7 @@ export class TasksComponent implements OnInit{
           window.location.reload();
         },
         error: (error) => {
-          console.log(error)
+
         }})
       }
   }
@@ -75,11 +74,9 @@ export class TasksComponent implements OnInit{
       newTask
     ).subscribe( {
       next: (response) => {
-        console.log(response);
         this.router.navigate(['/home'])
       },
      error: (error) => {
-        console.log(error)
      }})
   }
 

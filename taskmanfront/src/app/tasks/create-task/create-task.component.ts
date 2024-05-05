@@ -35,11 +35,9 @@ export class CreateTaskComponent {
       this.createTaskForm.value
     ).subscribe( {
       next: (response) => {
-        console.log(response);
         this.router.navigate(['/home'])
       },
      error: (error) => {
-        console.log(error)
      }})
   }
 

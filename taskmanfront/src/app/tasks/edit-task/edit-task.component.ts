@@ -32,7 +32,6 @@ export class EditTaskComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.params['id'];
     this.taskService.findOne(id).subscribe(response => {
-      console.log('task:',this.task)
       this.task = response
     });
   }
@@ -48,11 +47,11 @@ export class EditTaskComponent implements OnInit {
       this.editTaskForm.value
     ).subscribe( {
       next: (response) => {
-        console.log(response);
+
         this.router.navigate(['/home'])
       },
      error: (error) => {
-        console.log(error)
+
      }})
   }
 
