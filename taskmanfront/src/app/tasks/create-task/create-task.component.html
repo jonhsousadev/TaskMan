@@ -12,6 +12,8 @@
       <input
       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
          id="title" type="text" formControlName="title">
+      <small class="text-red-600" *ngIf="createTaskForm.touched && createTaskForm.get('title')?.hasError('required')">Required!</small>
+      <small class="text-red-600" *ngIf="createTaskForm.touched && createTaskForm.get('title')?.hasError('minlength')">Minimum 10 chars</small>
     </div>
     <div class="mb-4">
       <label class="inline-flex items-center cursor-pointer" for="completed">

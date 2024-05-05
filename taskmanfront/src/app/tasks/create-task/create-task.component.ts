@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class CreateTaskComponent {
   createTaskForm = new FormGroup({
-    title: new FormControl('', Validators.required),
+    title: new FormControl('', Validators.compose([Validators.required, Validators.minLength(10)])),
     completed: new FormControl(''),
   })
 
@@ -35,11 +35,9 @@ export class CreateTaskComponent {
       this.createTaskForm.value
     ).subscribe( {
       next: (response) => {
-        console.log(response);
         this.router.navigate(['/home'])
       },
      error: (error) => {
-        console.log(error)
      }})
   }
 

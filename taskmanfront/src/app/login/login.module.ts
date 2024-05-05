@@ -8,7 +8,7 @@ import { LoginService } from './services';
   declarations: [
   ],
   imports: [
-    CommonModule,
+    CommonModule
   ],
   providers: [
     LoginService

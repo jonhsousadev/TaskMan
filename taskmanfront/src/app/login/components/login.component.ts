@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { LoginService } from '../services';
 import { Router } from '@angular/router';
 
@@ -11,18 +11,21 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
+  @ViewChild('formLogin') formLogin: NgForm | undefined;
+
   errorString: string = '';
+  email = '';
 
   loginForm = new FormGroup({
-    email: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+    password: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
   })
 
   constructor(
     private loginService: LoginService,
     private router: Router
   ) {
-
+    this.loginForm.markAsPristine();
   }
 
   signUp() {
@@ -40,6 +43,7 @@ export class LoginComponent {
       next: (response) => {
         localStorage.setItem('token', response.token);
         this.router.navigate(['/home']);
+        this.errorString = ''
       },
       error: (err) => {
         // This block will only execute if catchError is used

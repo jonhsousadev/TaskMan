@@ -26,7 +26,6 @@ export class TasksComponent implements OnInit{
   findAll(): void {
     this.taskService.findAll().subscribe({ 
       next: (response) => {
-        console.log(response)
         this.tasks = response
       },
       error: (err) => {
@@ -47,15 +46,17 @@ export class TasksComponent implements OnInit{
     if(!task._id) {
       return;
     }
+    let removeConfirm = confirm('Are you sure that you want to delete this task?');
+    if(removeConfirm) {
+      this.taskService.remove(task._id
+      ).subscribe( {
+        next: (response) => {
+          window.location.reload();
+        },
+        error: (error) => {
 
-    this.taskService.remove(task._id
-    ).subscribe( {
-      next: (response) => {
-        window.location.reload();
-      },
-     error: (error) => {
-        console.log(error)
-     }})
+        }})
+      }
   }
 
   toggleCompleted(task: Task) {
@@ -73,11 +74,9 @@ export class TasksComponent implements OnInit{
       newTask
     ).subscribe( {
       next: (response) => {
-        console.log(response);
         this.router.navigate(['/home'])
       },
      error: (error) => {
-        console.log(error)
      }})
   }
 

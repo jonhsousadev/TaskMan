@@ -6,15 +6,17 @@
     <div class="flex w-full justify-center">
       <img src="../../../assets/taskman-logo.svg" alt="">
     </div>
+    <small class="text-red-600" *ngIf="errorString.length > 0">{{errorString}}</small>
     <div class="mb-4">
       <label 
         class="block text-gray-700 text-sm font-bold mb-2"
         for="name">
-        name
+        Name
       </label>
       <input
       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
          id="name" type="text" formControlName="name">
+      <small class="text-red-600" *ngIf="signUpForm.touched && signUpForm.get('name')?.hasError('required')">Required!</small>
     </div>
     <div class="mb-4">
       <label 
@@ -25,6 +27,8 @@
       <input
       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
          id="email" type="email" formControlName="email">
+      <small class="text-red-600" *ngIf="signUpForm.touched && signUpForm.get('email')?.hasError('required')">Required!</small>
+      <small class="text-red-600" *ngIf="signUpForm.touched && signUpForm.get('email')?.hasError('minlength')">Minimum 6 chars</small>
     </div>
     <div class="mb-4">
       <label 
@@ -35,6 +39,7 @@
       <input
       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
          id="password" type="password" formControlName="password">
+      <small class="text-red-600" *ngIf="signUpForm.touched && signUpForm.get('password')?.hasError('required')">Required!</small>
     </div>
     <button 
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" 
