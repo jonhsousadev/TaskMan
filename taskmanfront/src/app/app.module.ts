@@ -12,6 +12,8 @@ import { SignupComponent } from './login/components/signup.component';
 import { CreateTaskComponent } from './tasks/create-task/create-task.component';
 import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
 import { LoginComponent } from './login';
+import { StoreModule } from '@ngrx/store';
+import { tokenReducer } from './token.reducer'
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { LoginComponent } from './login';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({ message: tokenReducer })
   ],
   providers: [
     provideHttpClient(
