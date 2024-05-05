@@ -55,6 +55,7 @@ To execute this project, some processes needs to be done before the full executi
 
 ### Setup
 
+* Clone the project
 * Install and configure mongodb (a docker-compose.yml file that we have in the project structure can be used to do this)
 * install Node.js
 * Access the project folder structure and configure the backend with:
