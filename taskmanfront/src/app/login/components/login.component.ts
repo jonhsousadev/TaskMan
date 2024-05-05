@@ -38,9 +38,8 @@ export class LoginComponent {
       this.loginForm.value
     ).subscribe({ 
       next: (response) => {
-        console.log(response)
-        localStorage.setItem('token', response.token)
-        this.router.navigate(['/home'])
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         // This block will only execute if catchError is used

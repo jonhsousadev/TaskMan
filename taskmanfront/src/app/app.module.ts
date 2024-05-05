@@ -10,6 +10,8 @@ import { authInterceptor } from './services/auth.interceptor';
 import { HomeComponent } from './home/home.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { SignupComponent } from './login/components/signup.component';
+import { CreateTaskComponent } from './tasks/create-task/create-task.component';
+import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SignupComponent } from './login/components/signup.component';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    TasksComponent
+    TasksComponent,
+    CreateTaskComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,

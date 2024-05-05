@@ -8,16 +8,21 @@ import { LoginService } from './login';
 })
 export class AppComponent {
   title = 'taskmanfront';
-  token = localStorage.getItem('token');
+  token = localStorage.getItem('token') || '';
 
   constructor(
     private loginService: LoginService
   ){
-    this.token = localStorage.getItem('token');
+    this.token = localStorage.getItem('token') || '';
   }
   
   logOut() {
     this.loginService.logOut();
-    this.token = localStorage.getItem('token');
+    this.token = localStorage.getItem('token') || '';
   }
+
+  onActivate($event: any) {
+    this.token = localStorage.getItem('token') || '';
+  }
+  
 }
