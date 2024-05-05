@@ -11,9 +11,11 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent {
 
+  errorString: string = '';
+
   signUpForm = new FormGroup({
     name: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('',  Validators.compose([Validators.required, Validators.minLength(6)])),
     password: new FormControl('', Validators.required),
   })
 
@@ -35,11 +37,11 @@ export class SignupComponent {
       this.signUpForm.value
     ).subscribe( {
       next: (response) => {
-        console.log(response);
+        this.errorString = ''
         this.router.navigate(['/login'])
       },
-     error: (error) => {
-        console.log(error)
+     error: (err) => {
+        this.errorString = err.error.message;
      }})
   }
 

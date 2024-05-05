@@ -47,15 +47,17 @@ export class TasksComponent implements OnInit{
     if(!task._id) {
       return;
     }
-
-    this.taskService.remove(task._id
-    ).subscribe( {
-      next: (response) => {
-        window.location.reload();
-      },
-     error: (error) => {
-        console.log(error)
-     }})
+    let removeConfirm = confirm('Are you sure that you want to delete this task?');
+    if(removeConfirm) {
+      this.taskService.remove(task._id
+      ).subscribe( {
+        next: (response) => {
+          window.location.reload();
+        },
+        error: (error) => {
+          console.log(error)
+        }})
+      }
   }
 
   toggleCompleted(task: Task) {

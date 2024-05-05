@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class CreateTaskComponent {
   createTaskForm = new FormGroup({
-    title: new FormControl('', Validators.required),
+    title: new FormControl('', Validators.compose([Validators.required, Validators.minLength(10)])),
     completed: new FormControl(''),
   })
 
