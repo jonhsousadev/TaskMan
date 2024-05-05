@@ -1,0 +1,28 @@
+<div class="grid place-items-center">
+<div class="flex w-4/5 justify-between">
+  <p *ngIf="tasks.length" class="lg:text-3xl md:text-xl">All tasks are listed here, manage them or...</p>
+  <p *ngIf="!tasks.length" class="lg:text-3xl md:text-xl">We don't have created tasks. Start creating now!</p>
+  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+  (click)="createTask()">Add</button>
+</div>
+<table class="flex-auto md:w-4/5 sm:w-full flex-auto justify-center border-separate border-spacing-y-3">
+  <tbody class="md:w-2/3 sm:w-full">
+    <tr class="p-6 m-[100px] h-20 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px]" *ngFor="let task of tasks.slice().reverse()">
+      <td class="p-6 xl:text-xl md:text-base">{{task.title}}</td>
+      <td class="p-6 flex justify-end items-center">
+          <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" [(ngModel)]="task.completed" [checked]="task.completed" (click)="toggleCompleted(task)">
+            <div class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            <span class="hidden md:block ms-3 md:text-sm font-medium text-gray-900 dark:text-gray-300">{{task.completed ? 'Completed' : 'In progress'}}</span>
+          </label>
+      </td>
+      <td>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        (click)="editTask(task)">Edit</button>
+        <button class="bg-gray-500 hover:bg-gray-700 text-white font-bold ml-2 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        (click)="removeTask(task)">x</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
