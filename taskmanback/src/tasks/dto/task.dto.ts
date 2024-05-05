@@ -3,9 +3,6 @@ import { User } from 'src/auth/schemas/user.schema';
 
 
 export class TaskDto {
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(5)
   readonly title: string;
 
   @IsBoolean()

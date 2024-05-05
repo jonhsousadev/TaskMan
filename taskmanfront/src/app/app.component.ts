@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from './login';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'taskmanfront';
+  token = localStorage.getItem('token');
+
+  constructor(
+    private loginService: LoginService
+  ){
+    this.token = localStorage.getItem('token');
+  }
+  
+  logOut() {
+    this.loginService.logOut();
+    this.token = localStorage.getItem('token');
+  }
 }

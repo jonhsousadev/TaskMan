@@ -27,7 +27,7 @@ export class TasksService {
   }
 
   async update(id: string, task: TaskDto, user: User): Promise<Task> {
-    const data = Object.assign(task, user._id)
+    const data = Object.assign(task, user._id);
     await this.taskModel.updateOne({_id: id}, data).exec();
     return this.findOne(id);
   }

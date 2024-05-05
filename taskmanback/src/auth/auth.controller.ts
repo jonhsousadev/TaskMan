@@ -10,12 +10,12 @@ export class AuthController {
   }
 
   @Post('/signup')
-  signUp(@Body() signUpDto: SignUpDto): Promise<{token: string}> {
+  signUp(@Body() signUpDto: SignUpDto): Promise<{ success?: boolean, message?: string, token?: string }> {
     return this.authService.signUp(signUpDto)
   }
 
-  @Get('/login')
-  logIn(@Body() LogInDto: LogInDto): Promise<{token: string}> {
+  @Post('/login')
+  logIn(@Body() LogInDto: LogInDto): Promise<{ success?: boolean, message?: string, token?: string }> {
   return this.authService.login(LogInDto)
   }
 }

@@ -14,10 +14,16 @@ export class AuthService {
     private jwtService: JwtService 
   ) {}
 
-  async signUp(signUpDto: SignUpDto): Promise<{ token: string }> {
+  async signUp(signUpDto: SignUpDto): Promise<{ success?: boolean, message?: string, token?: string }> {
     const {name, email, password } = signUpDto;
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const userVerify = await this.userModel.findOne({email});
+
+    if (userVerify) {
+      return { message: 'There is an account with this email.'}
+    }
 
     const user = await this.userModel.create({
       name,
@@ -30,7 +36,7 @@ export class AuthService {
     return { token };
   }
 
-  async login(loginDto: LogInDto): Promise<{token: string}> {
+  async login(loginDto: LogInDto): Promise<{ success?: boolean, message?: string, token?: string }> {
     const {email, password } = loginDto;
 
     const user = await this.userModel.findOne({email});
@@ -43,6 +49,6 @@ export class AuthService {
 
     const token = this.jwtService.sign({ id: user._id })
 
-    return { token }; 
+    return { success: true, token: token }; 
   }
 }

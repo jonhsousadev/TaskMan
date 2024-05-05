@@ -1,0 +1,16 @@
+<p>tasks works!</p>
+<button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Task</button>
+<table class="tasks-table w-full mt-100">
+  <tbody>
+    <tr class="task-row" *ngFor="let task of tasks">
+      <td>{{task.title}}</td>
+      <td>
+        <input
+          type="checkbox"
+          [(ngModel)]="task.completed"
+          />
+          {{ task.completed }}
+      </td>
+    </tr>
+  </tbody>
+</table>
