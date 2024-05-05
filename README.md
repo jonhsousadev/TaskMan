@@ -59,7 +59,7 @@ To execute this project, some processes needs to be done before the full executi
 * install Node.js
 * Access the project folder structure and configure the backend with:
     - npm install
-    - DATABASE_CONNECTION_STRINGs with the string used to connect mongodb
+    - DATABASE_CONNECTION_STRING with the string used to connect mongodb
     - execute the project with the command: npm run start:dev
 * Access the project folder structure and configure the frontent with:
     - npm install
