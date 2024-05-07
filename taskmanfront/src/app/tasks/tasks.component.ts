@@ -27,11 +27,15 @@ export class TasksComponent implements OnInit{
       this.filteredTasks = this.tasks
   }
 
+  filterTasks() {
+    this.filteredTasks = this.tasks.map(t => Object.assign(t, { status: t.completed ? 'completed' : 'in progress' }));
+  }
+
   findAll(): void {
     this.taskService.findAll().subscribe({ 
       next: (response) => {
         this.tasks = response
-        this.filteredTasks = this.tasks.map(t => Object.assign(t,{status: t.completed ? 'completed' : 'in progress'}))
+        this.filterTasks();
       },
       error: (err) => {
         // This block will only execute if catchError is used
@@ -56,7 +60,8 @@ export class TasksComponent implements OnInit{
       this.taskService.remove(task._id
       ).subscribe( {
         next: (response) => {
-          this.ngOnInit()
+          this.tasks = this.tasks.filter(t => t._id !== task._id)
+          this.filterTasks()
         },
         error: (error) => {
 
@@ -80,10 +85,16 @@ export class TasksComponent implements OnInit{
     ).subscribe( {
       next: (response) => {
         this.router.navigate(['/home'])
+        this.tasks = this.tasks.map(t => {
+          if (t._id === newTask._id) 
+            t.completed = newTask.completed
+          return t
+        });
+        this.filterTasks()
       },
      error: (error) => {
      }})
-     this.ngOnInit()
+     
   }
 
 }
