@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TasksService } from './services';
 import { Observable } from 'rxjs';
 import { Task } from './shared/task.model';
@@ -13,20 +13,25 @@ import { Route, Router } from '@angular/router';
 export class TasksComponent implements OnInit{
 
   tasks: Task[] = [];
+  filteredTasks: any[] = [];
   errorString: string = '';
+  filter: string = 'all'
 
   constructor(
     private taskService: TasksService, 
-    private router: Router) {}
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
       this.findAll();
+      this.filteredTasks = this.tasks
   }
 
   findAll(): void {
     this.taskService.findAll().subscribe({ 
       next: (response) => {
         this.tasks = response
+        this.filteredTasks = this.tasks.map(t => Object.assign(t,{status: t.completed ? 'completed' : 'in progress'}))
       },
       error: (err) => {
         // This block will only execute if catchError is used
@@ -51,7 +56,7 @@ export class TasksComponent implements OnInit{
       this.taskService.remove(task._id
       ).subscribe( {
         next: (response) => {
-          window.location.reload();
+          this.ngOnInit()
         },
         error: (error) => {
 
@@ -78,6 +83,7 @@ export class TasksComponent implements OnInit{
       },
      error: (error) => {
      }})
+     this.ngOnInit()
   }
 
 }
